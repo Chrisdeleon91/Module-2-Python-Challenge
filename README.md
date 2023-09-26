@@ -3,7 +3,7 @@ I applied the concepts I’ve learned to complete the required PyBank Python act
 Both activities presented a real-world situation in which my newfound Python skills will come inhandy.
 
 
-## 1. Go into PyBank folder and launch PyBank.py from a new terminal
-a output.txt file exists to show the output of the current program
+### 1. Go into PyBank folder and launch PyBank.py from a terminal
+* A output.txt file exists to show the output of the current program
 
 ![Picture](https://www.columbia.edu/content/themes/custom/columbia/assets/img/cu-header.svg)
