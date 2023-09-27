@@ -1,4 +1,5 @@
 import csv
+from pathlib import Path
 
 #Initialize variables
 total_months = 0
@@ -60,25 +61,27 @@ for profit in profit_changes:
 # Calculate the average salary, round to the nearest 2 decimal places
 avg_profit = round(total_profit / count_profit, 2)
 
-print(f"Reading file budget_data.csv completed.\n")
+avg_profit_total = round(sum(profit_changes) / len(profit_changes),2)
 
-print(f"Financial Analysis")
-print("----------------------------\n")
-print(f"The total number of months is: {total_months}.")    
-print(f"The total profit is: ${total_pl}.")
-print(f"Average Change: ${avg_profit}")
-print(f"Greatest Increase in Profits was in : with a maximum profit of {(month_changes[profit_changes.index(max(profit_changes))])} ${max(profit_changes)} ")
+#Alternative print statement 
+#print(f"Average Change: ${avg_profit}")
+
+avg_profit_total = round(sum(profit_changes) / len(profit_changes),2)
+
 #Alternative print statement 
 #print(f"Greatest Increase in Profits was in : with a maximum profit of {(month_changes[profit_changes.index(max(profit_changes))])} ${max_profit} ")
-print(f"Greatest Decrease in Profits was in : with a minimum profit of {(month_changes[profit_changes.index(min(profit_changes))])} ${min(profit_changes)} ")
+
 #Alternative print statement 
 #print(f"Greatest Decrease in Profits was in : with a minimum profit of {(month_changes[profit_changes.index(min(profit_changes))])} ${min_profit} ")
 
-#Analysis and Calculations (35 points)
-#To receive all points, your code must:
-#Include a calculation of the total number of months in the dataset. (2 points)
-#Calculate the net total amount of Profit/Losses over the entire period. (3 points)
-#Calculate the average of the changes in Profit/Losses over the entire period. (5 points)
-#Calculate the greatest increase in Profits over the entire period (Date and Amount). (10 points)
-#Calculate the greatest decrease in Losses over the entire period (Date and Amount). (10 points)
-#Print the analysis and export the analysis to a text file that contains the final results. (5 points)
+outputtxt = Path("output.txt")
+
+with open(outputtxt, 'w') as outputfile:
+    outputfile.write(f"Financial Analysis\n")
+    outputfile.write(f"----------------------------\n")
+    outputfile.write(f"The total number of months is: {total_months}.\n")  
+    outputfile.write(f"The total profit is: ${total_pl}.\n")
+    outputfile.write(f"Average Change: ${avg_profit_total}\n")
+    outputfile.write(f"Greatest Increase in Profits was in : with a maximum profit of {(month_changes[profit_changes.index(max(profit_changes))])} ${max(profit_changes)}\n")
+    outputfile.write(f"Greatest Decrease in Profits was in : with a minimum profit of {(month_changes[profit_changes.index(min(profit_changes))])} ${min(profit_changes)}\n")
+    

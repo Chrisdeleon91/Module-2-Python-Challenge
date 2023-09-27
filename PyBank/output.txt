@@ -1,10 +1,7 @@
-Reading file budget_data.csv completed.
-
 Financial Analysis
 ----------------------------
-
 The total number of months is: 86.
 The total profit is: $38382578.
 Average Change: $-2315.12
-Greatest Increase in Profits was in : with a maximum profit of Feb-2012 $1926159 
-Greatest Decrease in Profits was in : with a minimum profit of Sep-2013 $-2196167 
+Greatest Increase in Profits was in : with a maximum profit of Feb-2012 $1926159
+Greatest Decrease in Profits was in : with a minimum profit of Sep-2013 $-2196167

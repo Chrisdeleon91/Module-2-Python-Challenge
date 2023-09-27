@@ -14,8 +14,9 @@ menu = []
 sales = []
 
 # @TODO: Read in the menu data into the menu list
-
-
+with open(csvpath, 'r') as csvfile:
+    csvreader = csv.reader(csv.reader(cvsfile,delmiter',')
+    
 
 
 
