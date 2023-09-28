@@ -98,8 +98,8 @@ for row in sales:
          
         
             # @TODO: Print out matching menu data
-            if Menu_Item == item
-            print(item)
+            if Menu_Item == item:
+                    print(row[0])
             
 
 

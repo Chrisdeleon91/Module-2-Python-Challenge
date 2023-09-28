@@ -8,5 +8,5 @@ Both activities presented a real-world situation in which my newfound Python ski
 
 ### 1. Go into PyRamen folder and launch PyRamen.py from a terminal
 * A output.txt file exists to show the output of the current program output
-* 
+ 
 ![Picture](https://www.columbia.edu/content/themes/custom/columbia/assets/img/cu-header.svg)
