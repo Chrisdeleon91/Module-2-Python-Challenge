@@ -1,87 +1,136 @@
+# -*- coding: UTF-8 -*-
+"""PyRamen Homework Starter."""
+
+# @TODO: Import libraries
 import csv
 from pathlib import Path
 
-#Initialize variables
+# @TODO: Set file paths for menu_data.csv and sales_data.csv
+menu_filepath = Path('menu_data.csv')
+sales_filepath = Path('sales_data.csv')
+
+# @TODO: Initialize list objects to hold our menu and sales data
+menu = []
+sales = []
+
+# @TODO: Read in the menu data into the menu list
+with open(menu_filepath, 'r') as csvfile:
+    csvreader = csv.reader(csvfile,delimiter=",")
+    csv_header = next(csvreader)
+    for row in csvfile:
+        #Append the row to the menu 
+        menu.append(row)
+                           
+# @TODO: Read in the sales data into the sales list
+with open(sales_filepath, 'r') as csvfile:
+    csvreader = csv.reader(csvfile,delimiter=",")
+    csv_header = next(csvreader)
+    for row in csvfile:
+        #Append the row to the menu 
+        sales.append(row)
+
+
+# @TODO: Initialize dict object to hold our key-value pairs of items and metrics
+report = {}
+
+# added variables
 total_months = 0
-total_pl = 0
-profit_changes = []
-month_changes = []
-previous_profit = None
+count = 0
+revenue = 0
+cost = 0
+profit = 0
+quantity = 0
+price = 0
 
-total_profit = 0
-count_profit = 0
-min_profit = 0
-max_profit = 0
+# Initialize a row counter variable
+row_count = 0
 
-#Analyze the records
-with open("./resources/budget_data.csv", 'r') as file:
-#returns the next line after the first line, "moves pointer" to second line in a sense
-    csvreader = csv.reader(file)
-    header = next(csvreader)
+# @TODO: Loop over every row in the sales list object
+for row in sales:
+
     
-    for month, pl in csvreader:
+
     #Calculation of the total number of months in the dataset 
-        total_months += 1
-        
-    #The net total amount of Profit/Losses over the entire period
-    #Convert the number in the text file from string to int
-        current_profit  = int(pl)
-        total_pl += current_profit  
-        
-    #The average of the changes in Profit/Losses over the entire period    
-         #if this is not the first month  
-        if previous_profit is not None:
-             #find difference between this month and the last one         
-            profit_differences = current_profit - previous_profit
-            #append to changes list
-            profit_changes.append(profit_differences)
-            month_changes.append(month)
-        #take what was just used as current_profit and make it the new previous then repeat the loop 
-        previous_profit = current_profit
+    total_months += 1  
 
-#Iterate over a list to find the min and max salaries
-for profit in profit_changes:
 
-    # Sum the total and count variables
-    total_profit += profit
-    count_profit += 1
+    # Line_Item_ID,Date,Credit_Card_Number,Quantity,Menu_Item
+    # @TODO: Initialize sales data variables
+    Line_Item_ID = row[0]
+    Date = row[1]
+    Credit_Card_Number = row[2]
+    Quantity = row[3]
+    Menu_Item = row[4]
+   
+    
 
-    # Logic to determine min and max salaries
-    if min_profit == 0:
-        min_profit = profit
-    #The greatest increase in profits (date and amount) over the entire period
-    elif profit > max_profit:
-        max_profit = profit #25 Feb-2012  
-    #The greatest decrease in losses (date and amount) over the entire period       
-    elif profit < min_profit:
-        min_profit = profit #44 Sept-2013 
+    # @TODO:
+    # If the item value not in the report, add it as a new entry with initialized metrics
+    # Naming convention allows the keys to be ordered in logical fashion, count, revenue, cost, profit
+    if Menu_Item not in report.keys():
+        report[Menu_Item] = {"01-count": count, "02-revenue": revenue, "03-cogs": cost, "04-profit": profit}
+    else:
+        report[Menu_Item]["01-count"] += count
+        report[Menu_Item]["02-revenue"] += revenue
+        report[Menu_Item]["03-cogs"] += cost
+        report[Menu_Item]["04-profit"] += profit
         
 
+    # @TODO: For every row in our sales data, loop over the menu records to determine a match
+    for row in menu:
+        
+        # Item,Category,Description,Price,Cost
+        # @TODO: Initialize menu data variables
+        item = row[0]
+        category = row[1]
+        description = row[2]
+        price = row[3]
+        cost = row[4]
 
-# Calculate the average salary, round to the nearest 2 decimal places
-avg_profit = round(total_profit / count_profit, 2)
+        # @TODO: Calculate profit of each item in the menu data
+        #profit = row[3] - row[4]
 
-avg_profit_total = round(sum(profit_changes) / len(profit_changes),2)
+        # @TODO: If the item value in our sales data is equal to the any of the items in the menu, then begin tracking metrics for that item
+        if item not in report.keys():
+            report[item] = {"01-count": count, "02-revenue": revenue, "03-cogs": cost, "04-profit": profit}
+        
+            
+         
+        
+            # @TODO: Print out matching menu data
+            if Menu_Item == item
+            print(item)
+            
 
-#Alternative print statement 
-#print(f"Average Change: ${avg_profit}")
 
-avg_profit_total = round(sum(profit_changes) / len(profit_changes),2)
 
-#Alternative print statement 
-#print(f"Greatest Increase in Profits was in : with a maximum profit of {(month_changes[profit_changes.index(max(profit_changes))])} ${max_profit} ")
 
-#Alternative print statement 
-#print(f"Greatest Decrease in Profits was in : with a minimum profit of {(month_changes[profit_changes.index(min(profit_changes))])} ${min_profit} ")
+            # @TODO: Cumulatively add up the metrics for each item key
+            report[item]["01-count"] += quantity
+            report[item]["02-revenue"] += price * quantity
+            report[item]["03-cogs"] += cost * quantity
+            report[item]["04-profit"] += profit * quantity  
 
+
+
+
+        # @TODO: Else, the sales item does not equal any of the item in the menu data, therefore no match
+        else:
+            #what do I do here
+            print(f"{Menu_Item} does not equal {item}! NO MATCH!")
+
+
+    # @TODO: Increment the row counter by 1
+    row_count += 1   
+
+# @TODO: Print total number of records in sales data
+print(len(report))
+
+
+
+# @TODO: Write out report to a text file (won't appear on the command line output)
 outputtxt = Path("output.txt")
 
 with open(outputtxt, 'w') as outputfile:
-    outputfile.write(f"Financial Analysis\n")
-    outputfile.write(f"----------------------------\n")
-    outputfile.write(f"The total number of months is: {total_months}.\n")  
-    outputfile.write(f"The total profit is: ${total_pl}.\n")
-    outputfile.write(f"Average Change: ${avg_profit_total}\n")
-    outputfile.write(f"Greatest Increase in Profits was in : with a maximum profit of {(month_changes[profit_changes.index(max(profit_changes))])} ${max(profit_changes)}\n")
-    outputfile.write(f"Greatest Decrease in Profits was in : with a minimum profit of {(month_changes[profit_changes.index(min(profit_changes))])} ${min(profit_changes)}\n")
-    
+    outputfile.write(f"hello")
+    outputfile.wirte(report)
