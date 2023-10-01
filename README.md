@@ -19,7 +19,7 @@ Ichiban Ramen tried doing this type of per-product analysis last year in Excel, 
 
 My task is to create a Python script that analyzes the financial records to analyze the business's financial performance.
 This assignment has two parts:
-* Read the Data*
+* Read the Data
 * Manipulate the Data
 
 ## Instructions on how to use 
