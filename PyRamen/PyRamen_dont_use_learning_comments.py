@@ -18,6 +18,7 @@ sales = []
 with open(menu_filepath, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)
+    # for row in csvfile:                                 MISTAKE
     for row in csvreader:
         #Append the row to the menu 
         menu.append(row)
@@ -26,6 +27,7 @@ with open(menu_filepath, 'r') as csvfile:
 with open(sales_filepath, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)
+    # for row in csvfile:                                 MISTAKE
     for row in csvreader:
         #Append the row to the menu 
         sales.append(row)
@@ -40,25 +42,30 @@ row_count = 0
 # @TODO: Loop over every row in the sales list object
 for row in sales:
 
-    #Calculation of the total number of months in the dataset -- this doesn't make sense this is wrongly put in from PyBank
+    #Calculation of the total number of months in the dataset   MISTAKE
+    #this doesn't make sense this is wrongly put in from PyBank
       
     # Line_Item_ID,Date,Credit_Card_Number,quantity,menu_item
     # @TODO: Initialize sales data variables
     Line_Item_ID = row[0]
     Date = row[1]
     Credit_Card_Number = row[2]
-    quantity = int(row[3])   
-    menu_item = row[4]
+    quantity = int(row[3])  #MISTAKE didn't put int
+    menu_item = row[4] 
    
     # @TODO:
     # If the item value not in the report, add it as a new entry with initialized metrics
     # Naming convention allows the keys to be ordered in logical fashion, count, revenue, cost, profit
     if menu_item not in report.keys():
-        report[menu_item] = {"01-count": 0,
-                             "02-revenue": 0,
-                             "03-cost": 0,
-                             "04-profit": 0}
-  
+        report[menu_item] = {"01-count": 0, "02-revenue": 0, "03-cost": 0, "04-profit": 0} 
+        
+    #     report[Menu_Item] = {"01-count": count, "02-revenue": revenue, "03-cogs": cost, "04-profit": profit} MISTAKE
+    # else:
+    #     report[Menu_Item]["01-count"] += count
+    #     report[Menu_Item]["02-revenue"] += revenue
+    #     report[Menu_Item]["03-cogs"] += cost
+    #     report[Menu_Item]["04-profit"] += profit
+        
     # @TODO: For every row in our sales data, loop over the menu records to determine a match
     for row in menu:
         # Item, Category, Description, Price, Cost
@@ -66,8 +73,8 @@ for row in sales:
         item = row[0]
         category = row[1]
         description = row[2]
-        price = float(row[3])
-        cost = int(row[4])
+        price = float(row[3]) #MISTAKEdidn't put float
+        cost = int(row[4])    #MISTAKE didn't put int
 
         # @TODO: Calculate profit of each item in the menu data
         profit = price - cost
@@ -77,6 +84,7 @@ for row in sales:
             # @TODO: Print out matching menu data   
             print(f"{menu_item} matches with {item}!") 
             # @TODO: Cumulatively add up the metrics for each item key
+            #report[item] = {"01-count": count, "02-revenue": revenue, "03-cogs": cost, "04-profit": profit}   MISTAKE
             report[menu_item]["01-count"] += quantity
             report[menu_item]["02-revenue"] += price * quantity
             report[menu_item]["03-cost"] += cost * quantity
