@@ -27,7 +27,7 @@ This assignment has two parts:
 ### 1. Go into the PyBank folder and launch PyBank.py from a terminal
 * An output.txt will be created by the program after it is executed
 
-### 1. Go into the PyRamen folder and launch PyRamen.py from a terminal
+### 2. Go into the PyRamen folder and launch PyRamen.py from a terminal
 * An output.txt will be created by the program after it is executed
  
 ![Picture](https://www.columbia.edu/content/themes/custom/columbia/assets/img/cu-header.svg)
